@@ -1,6 +1,8 @@
 import { StatusBar } from "../StatusBar/StatusBar";
 import { Link } from "react-router-dom";
 
+import lotpic from "../../../Assets/Images/lot.jpg";
+
 import styles from "./lot.module.scss";
 
 const Owner = (props) => {

@@ -84,13 +84,13 @@ export const FormFullFields = (props) => {
   };
 
   const formUI = props.furmFullUi;
-  const formDisplay = props.isFormModeOn ? {} : { display: "none" };
+  // const formDisplay = props.isFormModeOn ? {} : { display: "none" };
 
   return (
     <form
       onSubmit={props.handleSubmit}
       className={styles.formfull}
-      style={formDisplay}
+      // style={formDisplay}
     >
       <img className={styles.cloudtail} src={cloudtail} alt="tail" />
       <div className={styles.shape}>

@@ -17,12 +17,12 @@ export const FormFull = (props) => {
     props.publishNewLotFromForm(props.createLotId, { ...formData, ...updData });
   };
 
-  return (
+  return props.isFormModeOn && (
     <Form
       onSubmit={onSubmit}
       render={({ handleSubmit, form, values }) => (
         <FormFullFields
-          isFormModeOn={props.isFormModeOn}
+          // isFormModeOn={props.isFormModeOn}
           handleSubmit={handleSubmit}
           form={form}
           values={values}
