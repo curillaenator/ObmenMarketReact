@@ -30,7 +30,7 @@ const Home = (props) => {
         onLotCreateFromForm={props.onLotCreateFromForm}
         onLotCreateFormCancel={props.onLotCreateFormCancel}
       />
-      <Lots isFormModeOn={props.isFormModeOn} />
+      {props.isAuth && <Lots isFormModeOn={props.isFormModeOn} />}
       {!props.isAuth && props.isFormModeOn && <Warning />}
       {props.isAuth && (
         <FormFull
