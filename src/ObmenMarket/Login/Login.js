@@ -7,6 +7,8 @@ import { googleSignIn } from "../../Redux/Reducers/auth";
 import styles from "./login.module.scss";
 
 const Login = (props) => {
+  const handleLogin = () => props.googleSignIn(null);
+
   if (props.isAuth) return <Redirect to="/" />;
 
   return (
@@ -20,7 +22,7 @@ const Login = (props) => {
           width={56}
           height={56}
           icon={props.icons.google}
-          handler={props.googleSignInRedirectResult}
+          handler={handleLogin}
         />
       </div>
     </div>
@@ -33,5 +35,5 @@ const mstp = (state) => ({
 });
 
 export const LoginCont = connect(mstp, {
-  googleSignInRedirectResult: googleSignIn,
+  googleSignIn,
 })(Login);

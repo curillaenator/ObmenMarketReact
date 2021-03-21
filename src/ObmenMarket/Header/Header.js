@@ -9,11 +9,11 @@ import logo from "../../Assets/Icons/logo.svg";
 
 import styles from "./header.module.scss";
 
-const User = ({ username, avatar }) => {
+const User = ({ user }) => {
   return (
     <Link to="/profile" className={styles.user}>
-      <p>{username}</p>
-      <img src={avatar} alt={username} />
+      <p>{user.username}</p>
+      <img src={user.avatar} alt={user.username} />
     </Link>
   );
 };
@@ -33,19 +33,28 @@ export const Header = (props) => {
       </div>
 
       <div className={styles.pad}>
-        {props.isAuth ? (
-          <User username={props.user.username} avatar={props.user.avatar} />
-        ) : (
+        {!props.userLoading && props.isAuth && <User user={props.user} />}
+
+        {!props.userLoading && !props.isAuth && (
           <Link to={loginButtonPath} className={styles.loginButton}>
             <Button
-              width={40}
+              width={83}
               height={40}
+              title="Вход"
               handler={handleLoginButton}
-              icon={props.icons.login}
               active={loginButtonClicked}
             />
           </Link>
         )}
+        {/* <Link to={loginButtonPath} className={styles.loginButton}>
+          <Button
+            width={83}
+            height={40}
+            title="Вход"
+            handler={handleLoginButton}
+            active={loginButtonClicked}
+          />
+        </Link> */}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
-// import { useEffect } from "react";
-// import { useAuthState } from "react-firebase-hooks/auth";
+import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { fa } from "../Utils/firebase";
 
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
@@ -9,34 +10,27 @@ import { LoginCont } from "./Login/Login";
 import { HomeCont } from "./Home/Home";
 import { ProfileCont } from "./Profile/Profile";
 import { LotFullCont } from "./LotFull/LotFull";
-// import { Masks } from "./Components/Masks/Masks";
+
+import { googleSignIn } from "../Redux/Reducers/auth";
 
 import styles from "./obmen.module.scss";
 
-function Obmen({ setAuthIfLogined, ...props }) {
-  // const [user, userLoading] = useAuthState(props.fireauth);
-  // useEffect(() => setAuthIfLogined(user), [user, setAuthIfLogined]);
-
-  // userLoading = { userLoading };
+function Obmen({ googleSignIn, ...props }) {
+  const [user, userLoading] = useAuthState(fa);
+  useEffect(() => user && googleSignIn(user), [user, googleSignIn]);
 
   return (
     <div className={styles.container}>
-      <HeaderCont isFormModeOn={props.isFormModeOn} />
+      <HeaderCont isFormModeOn={props.isFormModeOn} userLoading={userLoading} />
       <Switch>
         <Route exact path="/" render={() => <HomeCont />} />
         <Route path="/posts/:id" render={() => <LotFullCont />} />
         <Route path="/login" render={() => <LoginCont />} />
         <Route path="/profile" render={() => <ProfileCont />} />
-        {/* <Route path="/masks" render={() => <Masks />} /> */}
       </Switch>
     </div>
   );
 }
-const mstp = (state) => ({
-  // fireauth: state.auth.fireauth,
-  // firestore: state.auth.firestore,
-});
+const mstp = (state) => ({});
 
-export const ObmenCont = connect(mstp, {})(Obmen);
-
-export default Obmen;
+export const ObmenCont = connect(mstp, { googleSignIn })(Obmen);
