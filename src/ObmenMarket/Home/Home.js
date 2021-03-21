@@ -10,10 +10,9 @@ import { FormFull } from "../Components/FormFull/FormFull";
 import { setFormMode } from "../../Redux/Reducers/home";
 
 import {
-  getLotsList,
-  initializeLot,
-  deleteCanceledLot,
-  publishLotFromForm,
+  onLotCreateFromForm,
+  onLotCreateFormCancel,
+  publishNewLotFromForm,
 } from "../../Redux/Reducers/lots";
 
 import styles from "./home.module.scss";
@@ -27,27 +26,19 @@ const Home = (props) => {
         icons={props.icons}
         isFormModeOn={props.isFormModeOn}
         setFormMode={props.setFormMode}
-        newLot={props.newLot}
-        newLotId={props.newLotId}
-        initializeLot={props.initializeLot}
-        deleteCanceledLot={props.deleteCanceledLot}
+        createLotId={props.createLotId}
+        onLotCreateFromForm={props.onLotCreateFromForm}
+        onLotCreateFormCancel={props.onLotCreateFormCancel}
       />
-      <Lots
-        lotsList={props.lotsList}
-        isLotsLoaded={props.isLotsLoaded}
-        isFormModeOn={props.isFormModeOn}
-        user={props.user}
-        firestore={props.firestore}
-        getLotsList={props.getLotsList}
-      />
+      <Lots isFormModeOn={props.isFormModeOn} />
       {!props.isAuth && props.isFormModeOn && <Warning />}
       {props.isAuth && (
         <FormFull
           isFormModeOn={props.isFormModeOn}
           icons={props.icons}
           furmFullUi={props.furmFullUi}
-          newLotId={props.newLotId}
-          publishLotFromForm={props.publishLotFromForm}
+          createLotId={props.createLotId}
+          publishNewLotFromForm={props.publishNewLotFromForm}
         />
       )}
     </div>
@@ -59,19 +50,12 @@ const mstp = (state) => ({
   icons: state.ui.icons,
   furmFullUi: state.ui.formFull,
   isFormModeOn: state.home.isFormModeOn,
-  firestore: state.auth.firestore,
-  // user: state.user.user,
-  newLot: state.lots.newLot,
-  newLotId: state.lots.newLotId,
-  lotsList: state.lots.lotsList,
-  isLotsLoaded: state.lots.isLotsLoaded,
-  isCurrentLot: state.lots.isCurrentLot,
+  createLotId: state.lots.createLotId,
 });
 
 export const HomeCont = connect(mstp, {
   setFormMode,
-  initializeLot,
-  deleteCanceledLot,
-  publishLotFromForm,
-  getLotsList,
+  onLotCreateFromForm,
+  onLotCreateFormCancel,
+  publishNewLotFromForm,
 })(Home);

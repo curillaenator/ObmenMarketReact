@@ -54,9 +54,15 @@ export const PhotoFiles = ({
         {...input}
         type="file"
         id="choosePhotos"
-        onChange={({ target }) => onChange(target.files)}
+        onChange={({ target }) => {
+          props.uploadImg(target.files[0])
+          // console.log(target.files[0]);
+          // onChange(target.files);
+        }}
       />
-      <label className={styles.photofilesLabel} htmlFor="choosePhotos">{props.title}</label>
+      <label className={styles.photofilesLabel} htmlFor="choosePhotos">
+        {props.title}
+      </label>
     </div>
   );
 };

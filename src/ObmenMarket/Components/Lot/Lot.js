@@ -1,9 +1,6 @@
 import { StatusBar } from "../StatusBar/StatusBar";
 import { Link } from "react-router-dom";
 
-import lotpic from "../../../Assets/Images/lot.jpg";
-import avapic from "../../../Assets/Images/ava.jpg";
-
 import styles from "./lot.module.scss";
 
 const Owner = (props) => {
@@ -27,17 +24,16 @@ export const Lot = ({ data }) => {
   // console.log(data);
   return (
     <div className={styles.lot}>
-      <Owner avatar={avapic} ownerName={"Кирилл Арт"} />
+      <Owner avatar={data.avatar} ownerName={data.username} />
 
-      <Link to={`/posts/${data.lotId}`} className={styles.content}>
-        <LotImage lotImage={lotpic} lotnName={data.title} />
+      <Link to={`/posts/${data.postid}`} className={styles.content}>
+        <LotImage lotImage={data.photos[0]} lotnName={data.title} />
 
         <div className={styles.title}>{data.title}</div>
 
         <div className={styles.description}>{data.description}</div>
 
-        <StatusBar offersQty={5} expiryDate={data.expireDate.seconds} />
-
+        <StatusBar offersQty={data.offersQty} expiryDate={data.expireDate} />
       </Link>
     </div>
   );

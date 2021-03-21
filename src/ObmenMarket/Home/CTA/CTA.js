@@ -3,15 +3,17 @@ import { Search } from "../../Components/Search/Search";
 
 import styles from "./cta.module.scss";
 
-export const Cta = (props) => {
-  const { isFormModeOn, setFormMode } = props;
-
+export const Cta = ({
+  isFormModeOn,
+  setFormMode,
+  icons,
+  createLotId,
+  onLotCreateFromForm,
+  onLotCreateFormCancel,
+}) => {
   const formModeHandler = () => {
+    !isFormModeOn ? onLotCreateFromForm() : onLotCreateFormCancel(createLotId);
     setFormMode(!isFormModeOn);
-
-    isFormModeOn
-      ? props.deleteCanceledLot(props.newLotId)
-      : props.initializeLot(props.newLot);
   };
 
   const ctaTitle = isFormModeOn ? "Передумал" : "Есть что обменять";
@@ -22,11 +24,11 @@ export const Cta = (props) => {
         width={217}
         height={56}
         title={ctaTitle}
-        icon={props.icons.add}
+        icon={icons.add}
         active={isFormModeOn}
         handler={formModeHandler}
       />
-      <Search icon={props.icons.search} />
+      <Search icon={icons.search} />
     </div>
   );
 };

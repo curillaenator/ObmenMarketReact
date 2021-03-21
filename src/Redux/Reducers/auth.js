@@ -27,17 +27,18 @@ const setCurrentUser = (user) => ({ type: SET_USER, user });
 // THUNKs
 
 export const googleSignIn = (curUser) => (dispatch) => {
-  const newUser = (us) => {
-    db.ref("users/" + us.uid).set({
-      username: us.displayName,
-      email: us.email,
-      avatar: us.photoURL,
+  const newUser = (u) => {
+    db.ref("users/" + u.uid).set({
+      username: u.displayName,
+      email: u.email,
+      avatar: u.photoURL,
     });
   };
 
   const toLogin = async () => {
     const provider = new fb.auth.GoogleAuthProvider();
     await fb.auth().signInWithPopup(provider);
+
     await fb.auth().onAuthStateChanged((u) => {
       const ref = db.ref("users/" + u.uid);
       ref.once("value", (snapshot) => {
@@ -54,9 +55,12 @@ export const googleSignIn = (curUser) => (dispatch) => {
       dispatch(setIsAuth(true));
     });
   };
+
   curUser !== null ? toAuthCheck(curUser) : toLogin();
 };
 
 export const logout = () => async (dispatch) => {
-  fa.signOut().then(() => dispatch(setIsAuth(false)));
+  await fa.signOut();
+  dispatch(setIsAuth(false));
+  dispatch(setCurrentUser(null));
 };

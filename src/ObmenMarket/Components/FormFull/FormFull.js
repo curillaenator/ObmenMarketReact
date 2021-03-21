@@ -5,15 +5,18 @@ export const FormFull = (props) => {
   const onSubmit = (formData) => {
     const curDate = new Date();
 
-    const addSubmitData = {
+    const updData = {
       acceptedOffer: "",
+      offersQty: 0,
       publishedAt: new Date(),
       expireDate: new Date(curDate.setDate(curDate.getDate() + 7)),
       published: true,
     };
-    
-    props.publishLotFromForm(props.newLotId, { ...formData, ...addSubmitData });
+
+    // console.log({ ...formData, ...updData });
+    props.publishNewLotFromForm(props.createLotId, { ...formData, ...updData });
   };
+
   return (
     <Form
       onSubmit={onSubmit}
@@ -25,6 +28,7 @@ export const FormFull = (props) => {
           values={values}
           icons={props.icons}
           furmFullUi={props.furmFullUi}
+          createLotId={props.createLotId}
         />
       )}
     />

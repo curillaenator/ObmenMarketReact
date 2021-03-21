@@ -1,21 +1,23 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Lot } from "../../Components/Lot/Lot";
+
+import { db } from "../../../Utils/firebase";
 
 import styles from "./lots.module.scss";
 
-export const Lots = ({
-  user,
-  firestore,
-  getLotsList,
-  isLotsLoaded,
-  ...props
-}) => {
-  useEffect(() => getLotsList(), [getLotsList, isLotsLoaded]);
-  const lotsDisplay = props.isFormModeOn ? { display: "none" } : {};
+export const Lots = ({ isFormModeOn }) => {
+  const [lotList, setLotList] = useState([]);
+  useEffect(() => {
+    db.ref("posts").on("value", (snapshot) => {
+      setLotList(snapshot.val());
+    });
+  }, []);
+
+  const lotsDisplay = isFormModeOn ? { display: "none" } : {};
   return (
     <div className={styles.lots} style={lotsDisplay}>
-      {props.lotsList.map((p) => (
-        <Lot data={p} key={p.lotId} />
+      {Object.keys(lotList).map((l) => (
+        <Lot data={lotList[l]} key={l} />
       ))}
     </div>
   );

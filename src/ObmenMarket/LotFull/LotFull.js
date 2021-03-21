@@ -1,3 +1,4 @@
+import { db, fa } from "../../Utils/firebase";
 import { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
@@ -7,7 +8,7 @@ import { ButtonOutline } from "../Components/Button/ButtonOutline";
 
 import lotpic from "../../Assets/Images/lot.jpg";
 
-import { setIsCurrentLotAfterRedirect } from "../../Redux/Reducers/lots";
+// import { setIsCurrentLotAfterRedirect } from "../../Redux/Reducers/lots";
 import { setFormMode } from "../../Redux/Reducers/home";
 
 import styles from "./lotfull.module.scss";
@@ -32,10 +33,12 @@ const Gallery = () => {
 };
 
 const LotFull = (props) => {
+  const uid = fa.currentUser.ui;
+
   const { setIsCurrentLotAfterRedirect, setFormMode } = props;
   useEffect(() => {
     setFormMode(false);
-    setIsCurrentLotAfterRedirect(false);
+    // setIsCurrentLotAfterRedirect(false);
   }, [setIsCurrentLotAfterRedirect, setFormMode]);
 
   const ref = useRef(0);
@@ -159,6 +162,6 @@ const mstp = (state) => ({
 });
 
 export const LotFullCont = connect(mstp, {
-  setIsCurrentLotAfterRedirect,
+  // setIsCurrentLotAfterRedirect,
   setFormMode,
 })(LotFull);
