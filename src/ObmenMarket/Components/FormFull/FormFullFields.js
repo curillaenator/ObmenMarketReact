@@ -77,21 +77,17 @@ export const FormFullFields = (props) => {
       (snap) => {},
       (error) => {},
       () =>
-        uploadTask.snapshot.ref
-          .getDownloadURL()
-          .then((url) => photosHandler(url))
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+          console.log(url);
+          photosHandler(url);
+        })
     );
   };
 
   const formUI = props.furmFullUi;
-  // const formDisplay = props.isFormModeOn ? {} : { display: "none" };
 
   return (
-    <form
-      onSubmit={props.handleSubmit}
-      className={styles.formfull}
-      // style={formDisplay}
-    >
+    <form onSubmit={props.handleSubmit} className={styles.formfull}>
       <img className={styles.cloudtail} src={cloudtail} alt="tail" />
       <div className={styles.shape}>
         <div className={styles.fields}>
