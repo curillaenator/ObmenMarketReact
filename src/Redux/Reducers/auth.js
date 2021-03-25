@@ -54,7 +54,7 @@ export const googleSignIn = (curUser) => (dispatch) => {
     await db.ref("users/" + u.uid).once("value", (snapshot) => {
       // console.log(u, snapshot.val());
       // console.log(snapshot.exists());
-      !snapshot.exists() && newUser(u);
+      // !snapshot.exists() && newUser(u);
       dispatch(setCurrentUser(snapshot.val()));
       dispatch(setIsAuth(true));
     });
