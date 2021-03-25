@@ -21,11 +21,7 @@ function Obmen({ googleSignIn, ...props }) {
 
   return (
     <div className={styles.container}>
-      <HeaderCont
-        isFormModeOn={props.isFormModeOn}
-        userLoading={userLoading}
-        user={user}
-      />
+      <HeaderCont isFormModeOn={props.isFormModeOn} userLoading={userLoading} />
       <Switch>
         <Route exact path="/" render={() => <HomeCont />} />
         <Route path="/posts/:id" render={() => <LotFullCont />} />

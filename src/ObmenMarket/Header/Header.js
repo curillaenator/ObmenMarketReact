@@ -19,7 +19,7 @@ const User = ({ user }) => {
 };
 
 export const Header = (props) => {
-  // console.log(props.user);
+  console.log(props.user);
 
   const handleLoginButton = () => props.setFormMode(false);
 
@@ -36,7 +36,6 @@ export const Header = (props) => {
 
       <div className={styles.pad}>
         {props.user && !props.userLoading && props.isAuth && <User user={props.user} />}
-        {/* {!props.userLoading && props.isAuth && <User user={props.user} />} */}
 
         {!props.userLoading && !props.isAuth && (
           <Link to={loginButtonPath} className={styles.loginButton}>
