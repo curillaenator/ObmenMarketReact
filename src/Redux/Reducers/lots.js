@@ -60,7 +60,6 @@ export const onLotCreateFormCancel = (id) => async (dispatch) => {
 };
 
 export const publishNewLotFromForm = (id, updData) => async (dispatch) => {
-  console.log(updData);
 
   const onUpdate = (error) => {
     if (error) return console.log("ошибка записи");

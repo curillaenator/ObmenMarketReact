@@ -29,7 +29,7 @@ export const Lot = ({ data }) => {
   const [photo, setPhoto] = useState(null);
   fb.storage()
     .ref()
-    .child("posts/" + data.uid + "/" + data.postid + "/0")
+    .child("posts/" + data.uid + "/" + data.postid + "/photo0")
     .getDownloadURL()
     .then((url) => setPhoto(url));
 

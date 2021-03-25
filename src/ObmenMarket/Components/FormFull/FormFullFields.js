@@ -72,7 +72,7 @@ export const FormFullFields = (props) => {
 
   const uploadImg = (file) => {
     const uploadTask = storage
-      .child("posts/" + uid + "/" + props.createLotId + "/" + photos.length)
+      .child("posts/" + uid + "/" + props.createLotId + "/photo" + photos.length)
       .put(file);
 
     uploadTask.on(
