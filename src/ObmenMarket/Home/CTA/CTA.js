@@ -4,6 +4,7 @@ import { Search } from "../../Components/Search/Search";
 import styles from "./cta.module.scss";
 
 export const Cta = ({
+  isAuth,
   isFormModeOn,
   setFormMode,
   icons,
@@ -11,7 +12,9 @@ export const Cta = ({
   onLotCreateFromForm,
   onLotCreateFormCancel,
 }) => {
-  const formModeHandler = () => {
+  const formModeHandlerUnauthed = () => setFormMode(!isFormModeOn);
+
+  const formModeHandlerAuthed = () => {
     !isFormModeOn ? onLotCreateFromForm() : onLotCreateFormCancel(createLotId);
     setFormMode(!isFormModeOn);
   };
@@ -26,7 +29,7 @@ export const Cta = ({
         title={ctaTitle}
         icon={icons.add}
         active={isFormModeOn}
-        handler={formModeHandler}
+        handler={isAuth ? formModeHandlerAuthed : formModeHandlerUnauthed}
       />
       <Search icon={icons.search} />
     </div>

@@ -19,7 +19,7 @@ const User = ({ user }) => {
 };
 
 export const Header = (props) => {
-  console.log(props.user);
+  // console.log(props.user);
 
   const handleLoginButton = () => props.setFormMode(false);
 

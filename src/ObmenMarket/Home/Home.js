@@ -24,6 +24,7 @@ const Home = (props) => {
       <Welcome />
       <Cta
         icons={props.icons}
+        isAuth={props.isAuth}
         isFormModeOn={props.isFormModeOn}
         setFormMode={props.setFormMode}
         createLotId={props.createLotId}

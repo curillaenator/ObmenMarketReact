@@ -30,11 +30,15 @@ export const onLotCreateFromForm = () => async (dispatch) => {
   const authedUser = await fa.currentUser;
   const newLotId = await db.ref().child("posts").push().key;
 
+  // console.log(authedUser);
+
   const newLotData = {
     uid: authedUser.uid,
     postid: newLotId,
     username: authedUser.displayName,
     avatar: authedUser.photoURL,
+    published: false,
+    draft: true,
   };
 
   dispatch(setNewLotId(newLotId));
@@ -47,7 +51,7 @@ export const onLotCreateFromForm = () => async (dispatch) => {
 export const onLotCreateFormCancel = (id) => async (dispatch) => {
   await db.ref("posts/" + id).remove();
   dispatch(setNewLotId(null));
-  
+
   const storage = fb.storage().ref();
   storage
     .child("posts/" + fa.currentUser.uid + "/" + id)
@@ -56,6 +60,8 @@ export const onLotCreateFormCancel = (id) => async (dispatch) => {
 };
 
 export const publishNewLotFromForm = (id, updData) => async (dispatch) => {
+  console.log(updData);
+
   const onUpdate = (error) => {
     if (error) return console.log("ошибка записи");
     db.ref("posts/" + id).once("value", (snap) => {
@@ -65,5 +71,11 @@ export const publishNewLotFromForm = (id, updData) => async (dispatch) => {
   };
   await db.ref("posts/" + id).update(updData, onUpdate);
 };
+
+// export const setCurrentLotFull = (lotID) => (dispatch) => {
+//   db.ref("posts/" + lotID).once("value", (snap) =>
+//     dispatch(setCurrentLot(snap.val()))
+//   );
+// };
 
 export const setIsCurrentLotAfterRedirect = (boolean) => (dispatch) => {};

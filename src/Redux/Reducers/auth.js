@@ -27,7 +27,7 @@ const setCurrentUser = (user) => ({ type: SET_USER, user });
 // THUNKs
 
 export const googleSignIn = (curUser) => (dispatch) => {
-  const toAuthCheck = async (u) => {
+  const toAuthSet = async (u) => {
     await db.ref("users/" + u.uid).once("value", (snapshot) => {
       dispatch(setCurrentUser(snapshot.val()));
       dispatch(setIsAuth(true));
@@ -41,10 +41,10 @@ export const googleSignIn = (curUser) => (dispatch) => {
         email: u.email,
         avatar: u.photoURL,
       })
-      .then(() => toAuthCheck(u));
+      .then(() => toAuthSet(u));
   };
 
-  const toLogin = async () => {
+  const toAuthCreate = async () => {
     const provider = new fb.auth.GoogleAuthProvider();
     await fb.auth().signInWithPopup(provider);
 
@@ -55,7 +55,7 @@ export const googleSignIn = (curUser) => (dispatch) => {
   };
 
   // console.log(curUser);
-  curUser !== null ? toAuthCheck(curUser) : toLogin();
+  curUser !== null ? toAuthSet(curUser) : toAuthCreate();
 };
 
 export const logout = () => async (dispatch) => {

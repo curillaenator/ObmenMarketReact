@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { fb, fa } from "../../../Utils/firebase";
 import { Field } from "react-final-form";
+
 import { Button } from "../Button/Button";
 import { ButtonOutline } from "../Button/ButtonOutline";
+
 import {
   required,
   minLength,
@@ -61,7 +63,8 @@ export const FormFullFields = (props) => {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    props.form.change("photos", photos);
+    // props.form.change("photos", photos);
+    props.form.change("photos", null);
     props.form.submit();
   };
 
@@ -77,10 +80,9 @@ export const FormFullFields = (props) => {
       (snap) => {},
       (error) => {},
       () =>
-        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-          console.log(url);
-          photosHandler(url);
-        })
+        uploadTask.snapshot.ref
+          .getDownloadURL()
+          .then((url) => photosHandler(url))
     );
   };
 

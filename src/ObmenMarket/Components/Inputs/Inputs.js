@@ -1,4 +1,6 @@
 import TextareaAutosize from "react-textarea-autosize";
+import Resizer from "react-image-file-resizer";
+
 import styles from "./inputs.module.scss";
 
 // Validators
@@ -47,6 +49,23 @@ export const PhotoFiles = ({
   meta,
   ...props
 }) => {
+  const resizedFile = (file) =>
+    new Promise((resolve) =>
+      Resizer.imageFileResizer(
+        file,
+        1280,
+        720,
+        "JPEG",
+        40,
+        0,
+        (uri) => {
+          console.log(uri);
+          props.uploadImg(uri);
+        },
+        "file"
+      )
+    );
+
   return (
     <div className={styles.input}>
       <input
@@ -55,7 +74,9 @@ export const PhotoFiles = ({
         type="file"
         id="choosePhotos"
         onChange={({ target }) => {
-          props.uploadImg(target.files[0])
+          resizedFile(target.files[0]);
+
+          // props.uploadImg(target.files[0]);
           // console.log(target.files[0]);
           // onChange(target.files);
         }}
