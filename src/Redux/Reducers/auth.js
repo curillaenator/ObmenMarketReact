@@ -42,8 +42,9 @@ export const googleSignIn = (curUser) => (dispatch) => {
     await fb.auth().onAuthStateChanged((u) => {
       const ref = db.ref("users/" + u.uid);
       ref.once("value", (snapshot) => {
-        dispatch(setCurrentUser(snapshot.val()));
+        
         !snapshot.exists && newUser(u);
+        dispatch(setCurrentUser(snapshot.val()));
         dispatch(setIsAuth(true));
       });
     });
