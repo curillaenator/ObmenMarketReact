@@ -46,15 +46,6 @@ export const Header = (props) => {
             />
           </Link>
         )}
-        {/* <Link to={loginButtonPath} className={styles.loginButton}>
-          <Button
-            width={83}
-            height={40}
-            title="Вход"
-            handler={handleLoginButton}
-            active={loginButtonClicked}
-          />
-        </Link> */}
       </div>
     </div>
   );
