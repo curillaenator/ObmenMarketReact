@@ -1,4 +1,4 @@
-import { db } from "../../Utils/firebase";
+import { db, fb } from "../../Utils/firebase";
 import { useState, useEffect, useRef } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -14,18 +14,37 @@ import { setFormMode } from "../../Redux/Reducers/home";
 
 import styles from "./lotfull.module.scss";
 
-const Gallery = () => {
-  const temp = ["1", "2", "3"];
+const Gallery = ({ lotMeta }) => {
+  const [lotPhotos, setLotPhotos] = useState([]);
+  const photosHandler = (url) => {
+    console.log(lotPhotos);
+    setLotPhotos(lotPhotos.concat([url]));
+  };
+
+  const getLotPhotos = async () => {
+    const res = await fb
+      .storage()
+      .ref()
+      .child("posts/" + lotMeta.uid + "/" + lotMeta.postid)
+      .listAll();
+
+    const getUrl = async (item) => photosHandler(await item.getDownloadURL());
+
+    await res.items.forEach((item) => getUrl(item));
+  };
+
+  useEffect(() => lotMeta && getLotPhotos(), [lotMeta]);
+
   return (
     <div className={styles.gallery}>
       <div className={styles.big}>
-        <img src={lotpic} alt="" />
+        <img src={lotPhotos[0]} alt="" />
       </div>
 
       <div className={styles.track}>
-        {temp.map((ph) => (
+        {lotPhotos.map((ph) => (
           <div className={styles.small} key={ph}>
-            <img src={lotpic} alt="" />
+            <img src={ph} alt="" />
           </div>
         ))}
       </div>
@@ -98,18 +117,17 @@ const Buttons = ({ icons }) => {
 const LotFull = ({ setFormMode, icons, match, ...props }) => {
   useEffect(() => setFormMode(false), [setFormMode]);
 
-  // const [lotMeta, setLotMeta] = useState(null);
+  const [lotMeta, setLotMeta] = useState(null);
 
-  // db.ref("posts/" + match.params.id).once("value", (snap) =>
-  //   setLotMeta(snap.val())
-  // );
+  const getLotMeta = (lotID) =>
+    db.ref("posts/" + lotID).once("value", (snap) => setLotMeta(snap.val()));
 
-  // console.log(lotMeta);
+  useEffect(() => getLotMeta(match.params.id), [match.params.id]);
 
   return (
     <div className={styles.lot}>
       <div className={styles.info}>
-        <Gallery />
+        <Gallery lotMeta={lotMeta} />
 
         <div className={styles.status}>
           <StatusBar />

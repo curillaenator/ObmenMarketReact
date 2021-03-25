@@ -75,10 +75,7 @@ export const PhotoFiles = ({
         id="choosePhotos"
         onChange={({ target }) => {
           resizedFile(target.files[0]);
-
           // props.uploadImg(target.files[0]);
-          // console.log(target.files[0]);
-          // onChange(target.files);
         }}
       />
       <label className={styles.photofilesLabel} htmlFor="choosePhotos">
