@@ -42,8 +42,8 @@ export const googleSignIn = (curUser) => (dispatch) => {
     await fb.auth().onAuthStateChanged((u) => {
       const ref = db.ref("users/" + u.uid);
       ref.once("value", (snapshot) => {
-        
-        !snapshot.exists && newUser(u);
+        console.log(snapshot);
+        !snapshot.exists() && newUser(u);
         dispatch(setCurrentUser(snapshot.val()));
         dispatch(setIsAuth(true));
       });
@@ -52,11 +52,14 @@ export const googleSignIn = (curUser) => (dispatch) => {
 
   const toAuthCheck = async (u) => {
     await db.ref("users/" + u.uid).once("value", (snapshot) => {
+      // console.log(u, snapshot.val());
+      // console.log(snapshot.exists());
+      !snapshot.exists() && newUser(u);
       dispatch(setCurrentUser(snapshot.val()));
       dispatch(setIsAuth(true));
     });
   };
-
+  // console.log(curUser);
   curUser !== null ? toAuthCheck(curUser) : toLogin();
 };
 
