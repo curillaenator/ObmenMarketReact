@@ -9,14 +9,15 @@
     display: flex;
     align-items: center;
     & > img {
+      margin-top: 0px;
       margin-right: 9px;
     }
     & > p {
       font-weight: 600;
-      font-size: 12px;
+      font-size: 14px;
       line-height: 16px;
-      letter-spacing: -0.08px;
-      color: $fontGrey;
+      letter-spacing: -0.16px;
+      color: $fontTitle;
     }
   }
   .timing {
@@ -24,29 +25,30 @@
     align-items: center;
     & > p {
       font-weight: 600;
-      font-size: 12px;
+      font-size: 14px;
       line-height: 16px;
       text-align: right;
       letter-spacing: -0.08px;
-      color: $fontGrey;
+      color: $fontTitle;
     }
     & > img {
+      margin-top: -2px;
       margin-left: 9px;
     }
   }
 }
 
-@media (min-width: 375px) {
-  .statusbar {
-    .offers {
-      & > p {
-        font-size: 13px;
-      }
-    }
-    .timing {
-      & > p {
-        font-size: 13px;
-      }
-    }
-  }
-}
+// @media (min-width: 375px) {
+//   .statusbar {
+//     .offers {
+//       & > p {
+//         font-size: 14px;
+//       }
+//     }
+//     .timing {
+//       & > p {
+//         font-size: 14px;
+//       }
+//     }
+//   }
+// }

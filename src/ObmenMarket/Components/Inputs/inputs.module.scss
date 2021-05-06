@@ -1,104 +1,135 @@
-@import '../../../palette.scss';
+@import "../../../palette.scss";
+
+@mixin placeholder {
+  &::placeholder {
+    color: $fontGrey;
+    transition: 0.08s;
+  }
+
+  &:focus::placeholder {
+    opacity: 0;
+  }
+}
 
 .input {
-    position: relative; // for photofiles
+  position: relative; // for photofiles
+
+  .textinput {
+    width: 100%;
+    height: 52px;
+    border: 0;
+    border-bottom: 1px solid $formSpacer;
+    background-color: transparent;
+    color: $fontTitle;
+    outline: none;
+
+    @include placeholder;
+  }
+
+  .message {
+    width: 100%;
+    height: 56px;
+    padding: 0 58px 0 16px;
+    border: 0;
+    border-radius: 16px;
+    background-color: $fontWhite;
+    color: $fontTitle;
+    outline: none;
+
+    @include placeholder;
+  }
+
+  .textarea {
+    width: 100%;
+    min-height: 52px;
+    padding-top: 16px;
+    border: 0;
+    border-bottom: 1px solid $formSpacer;
+    background-color: transparent;
+    color: $fontTitle;
+    resize: none;
+    overflow-y: auto;
+    outline: none;
+
+    @include placeholder;
+  }
+
+  .checkbox {
+    position: relative;
+    margin-top: 16px;
+
     & > input {
-      width: 100%;
-      height: 52px;
-      background-color: transparent;
-      border: 0;
-      border-bottom: 1px solid $formSpacer;
-      font-family: Inter;
-      font-weight: 700;
-      font-size: 13px;
-      line-height: 19px;
-      letter-spacing: -0.08px;
-      color: $fontTitle;
-      outline: none;
-      &::placeholder {
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: -0.149333px;
-        color: $fontGrey;
-        transition: 0.12s;
-      }
-      &:focus::placeholder {
-        opacity: 0;
-      }
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      z-index: -20;
     }
-    & > textarea {
-      width: 100%;
-      min-height: 52px;
-      padding-top: 16px;
-      resize: none;
-      overflow-y: auto;
-      outline: none;
-      background-color: transparent;
-      border: 0;
-      border-bottom: 1px solid $formSpacer;
-      font-family: Inter;
-      font-weight: 700;
-      font-size: 13px;
-      line-height: 19px;
-      letter-spacing: -0.08px;
-      color: $fontTitle;
-      &::placeholder {
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: -0.149333px;
-        color: $fontGrey;
-        transition: 0.12s;
-      }
-      &:focus::placeholder {
-        opacity: 0;
-      }
-    }
-    .photofiles {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -10;
-        opacity: 0;
-      }
-    .photofilesLabel {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 185px;
-        border-radius: 16px;
-        height: 40px;
-        background-color: $primary;
-        color: $fontWhite;
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: -0.149333px;
-        transition: 0.12s linear;
-        z-index: 10;
-        user-select: none;
-        cursor: pointer;
-        filter: drop-shadow(0 4px 4px $primaryIdleShadow)
-          drop-shadow(0 0 1px $primaryIdleShadow)
-          drop-shadow(0 0 1px $primaryIdleShadow);
-        &:hover {
-          background-color: $primaryHover;
-        }
-        &:active {
-          background-color: $primary;
-          color: $primaryFontClicked;
-          filter: none;
-        }
-      }
-    & > p {
-      font-weight: 500;
-      font-size: 11px;
-      line-height: 16px;
-      letter-spacing: -0.149333px;
-      color: $fontSub;
+
+    & > label {
       user-select: none;
     }
-    .error {
-      color: $fontDanger;
+
+    & > input + label {
+      position: relative;
+      margin-left: 28px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    & > input + label:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -28px;
+      width: 20px;
+      height: 20px;
+      border-radius: 7px;
+      background-color: transparent;
+      border: 2px solid $outlineHover;
+      transform: translateY(-50%);
+      background-position: center;
+      background-size: 60%;
+      background-repeat: no-repeat;
+    }
+
+    & > input:checked + label::before {
+      background-image: url(../../../Assets/Icons/v_check_active.svg);
     }
   }
+
+  .uploadcheck {
+    display: none;
+  }
+
+  .sup {
+    display: flex;
+    align-items: center;
+
+    & > img {
+      margin-right: 8px;
+    }
+
+    & > P {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 16px;
+      letter-spacing: -0.08px;
+      color: $fontGrey;
+      user-select: none;
+    }
+  }
+
+  .sub {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.149333px;
+    color: $fontSub;
+    user-select: none;
+  }
+
+  .error {
+    color: $fontDanger;
+  }
+}

@@ -6,10 +6,10 @@ import { googleSignIn } from "../../Redux/Reducers/auth";
 
 import styles from "./login.module.scss";
 
-const Login = (props) => {
-  const handleLogin = () => props.googleSignIn(null);
+const Login = ({ icons, isAuth, googleSignIn }) => {
+  const handleLogin = () => googleSignIn(null);
 
-  if (props.isAuth) return <Redirect to="/" />;
+  if (isAuth) return <Redirect to="/" />;
 
   return (
     <div className={styles.login}>
@@ -21,7 +21,7 @@ const Login = (props) => {
         <Button
           width={56}
           height={56}
-          icon={props.icons.google}
+          icon={icons.google}
           handler={handleLogin}
         />
       </div>

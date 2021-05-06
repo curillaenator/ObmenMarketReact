@@ -1,0 +1,32 @@
+{
+    "rules": {
+      
+      "users": {
+        ".read": true,
+        ".write": "auth != null && !data.child(auth.uid).exists() || root.child('users').child(auth.uid).child('isAdmin').val() === true",
+          
+        "$uid": {
+            ".read": true,
+            ".write": "auth != null && data.parent().hasChild(auth.uid) && auth.uid === $uid"
+          }
+      },
+  
+    "posts": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": ["uid", "published"],
+        "$postID": {
+            ".read": true,
+            ".write": "auth != null && data.child('uid').val() === auth.uid || root.child('users').child(auth.uid).child('isAdmin').val() == true"
+            }
+        },
+    "$postID": {
+        ".read": true,
+        ".write": true,
+        "$offerID": {
+            ".read": true,
+            ".write": "auth != null && data.child('authorID').val() === auth.uid || root.child('users').child(auth.uid).child('isAdmin').val() == true"
+            }
+        }
+    }
+}

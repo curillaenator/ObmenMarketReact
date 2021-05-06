@@ -1,0 +1,37 @@
+@import "../../../palette.scss";
+
+.cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 64px;
+  .button {
+    position: fixed;
+    bottom: 32px;
+    left: 160px;
+    margin-right: 0;
+    transform: translateX(-50%);
+    z-index: 500;
+  }
+}
+
+@media (min-width: 320px) {
+  .cta {
+    .button {
+      left: 50%;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .cta {
+    .button {
+      position: inherit;
+      bottom: auto;
+      left: auto;
+      margin-right: 40px;
+      transform: none;
+    }
+  }
+}

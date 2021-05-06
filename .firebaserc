@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "obmen-market-666"
+  },
+  "targets": {
+    "obmen-market-666": {
+      "database": {
+        "main": [
+          "obmenmarket",
+          "obmenmarket-offers"
+        ]
+      }
+    }
+  }
+}

@@ -3,17 +3,24 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./Redux/store";
-import { ObmenCont } from "./ObmenMarket/Obmen";
+import ScrollMemory from "react-router-scroll-memory";
+
+import { ObmenMarketApp } from "./ObmenMarket/Obmen";
 
 import "./index.scss";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <ObmenCont />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const App = () => {
+  return (
+    <React.StrictMode>
+      <Provider store={store}>
+        <BrowserRouter>
+          <>
+            <ScrollMemory />
+            <ObmenMarketApp />
+          </>
+        </BrowserRouter>
+      </Provider>
+    </React.StrictMode>
+  );
+};
+ReactDOM.render(<App />, document.getElementById("root"));

@@ -1,99 +1,186 @@
-import styles from "./button.module.scss";
+import styled from "styled-components";
+import preloader from "../../../Assets/Images/loader.svg";
+import { colors } from "../../../Utils/palette";
 
-const Shape = ({ width, height, active, disabled }) => {
-  const smoothQ = 72;
-  const radius = 25;
+const shapeColor = ({ base, active, disabled }) => {
+  if (active || disabled) return colors.primaryActive;
+  return base;
+};
+
+const shapeFilter = ({ params, active, disabled }) => {
+  if (active || disabled) return "none";
+  return params;
+};
+
+const iconState = ({ icon, active, disabled, state }) => {
+  if (disabled) return icon && icon.disabled;
+  if (active) return icon && icon.active;
+  return icon && icon[state];
+};
+
+const ttlColor = ({ base, active, disabled }) => {
+  if (disabled) return colors.primaryDisabled;
+  if (active) return colors.fontTitle;
+  return base;
+};
+
+const ButtonWrap = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: ${(props) => props.transition}s linear;
+  will-change: filter, transform;
+
+  &:hover {
+    transform: ${(props) =>
+      props.disabled || props.active
+        ? "scale3d(1, 1, 1)"
+        : "scale3d(1.04, 1.04, 1.04)"};
+  }
+
+  &:active {
+    transform: scale3d(1, 1, 1);
+  }
+
+  .loader {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
+
+  .shape {
+    will-change: filter;
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: ${(props) => shapeColor({ ...props, base: colors.primary })};
+    filter: drop-shadow(
+      ${(props) => shapeFilter({ ...props, params: "0 10px 14px #1a1a1a3f" })}
+    );
+    transition: ${(props) => props.transition}s linear;
+    z-index: -1;
+  }
+
+  &:hover .shape {
+    fill: ${(props) => shapeColor({ ...props, base: colors.primaryHover })};
+    filter: drop-shadow(
+      ${(props) => shapeFilter({ ...props, params: "0 12px 16px ##1a1a1a48" })}
+    );
+  }
+
+  &:active .shape {
+    fill: ${(props) => shapeColor({ ...props, base: colors.primary })};
+    filter: none;
+  }
+
+  .icon {
+    height: 24px;
+    width: 24px;
+    margin-right: ${(props) => (props.title ? "12px" : "0px")};
+    background-image: url(${(props) => iconState({ ...props, state: "idle" })});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: 0.08s linear;
+  }
+
+  &:hover .icon {
+    background-image: url(${(props) =>
+      iconState({ ...props, state: "hover" })});
+  }
+
+  &:active .icon {
+    background-image: url(${(props) =>
+      iconState({ ...props, state: "clicked" })});
+  }
+
+  .title {
+    width: ${(props) => (props.titlewidth ? props.titlewidth : "fit-content")};
+    color: ${(props) => ttlColor({ ...props, base: colors.fontWhite })};
+    font-weight: 700;
+    font-size: ${(props) => (props.fontsize ? props.fontsize + "px" : "14px")};
+    line-height: 24px;
+    letter-spacing: -0.149333px;
+    transition: 0.08s linear;
+
+    .subtitle {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.16px;
+      opacity: 0.8;
+    }
+  }
+`;
+
+export const Button = ({
+  width = 217,
+  height = 56,
+  title = "",
+  subtitle = "",
+  icon = null,
+  loader = false,
+  active = false,
+  disabled = false,
+  handler = () => console.log("click"),
+  titlewidth = null,
+  fontsize = null,
+}) => {
+  const transition = 0.06;
+  const smoothQ = 98;
+  const radius = 23.33; // 44
 
   const W = width;
   const H = height;
-  const R = H / 2 < radius ? H / 2 : radius;
-  const _smooth = H / 2 < radius ? 85 : smoothQ;
-  const S = (0.08 + R * 0.0009) * _smooth - 5 / _smooth - 4;
-
-  const shapePresent = active
-    ? `${styles.shape} ${styles.shapeActive}`
-    : `${styles.shape} ${styles.shapeIdle}`;
-
-  const shapeClassName = disabled
-    ? `${styles.shape} ${styles.shapeDisabled}`
-    : shapePresent;
+  const R = H / 2 < radius ? H / 2 : radius; // 2.4
+  const S = (0.08 + R * 0.000012) * smoothQ - 4 / smoothQ - 3;
   return (
-    <svg
-      className={shapeClassName}
-      version="1.1"
-      width="100%"
-      height="100%"
-      viewBox={`0 0 ${width} ${height}`}
-      xmlns="http://www.w3.org/2000/svg"
+    <ButtonWrap
+      icon={icon}
+      width={width}
+      height={height}
+      title={title}
+      active={active}
+      disabled={disabled}
+      titlewidth={titlewidth}
+      fontsize={fontsize}
+      transition={transition}
+      onClick={handler}
     >
-      <path
-        d={`M ${R} 0 H${W - R} C ${W - S} 0 ${W} ${S} ${W} ${R}
+      <svg
+        className="shape"
+        version="1.1"
+        width="100%"
+        height="100%"
+        viewBox={`0 0 ${width} ${height}`}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d={`M ${R} 0 H${W - R} C ${W - S} 0 ${W} ${S} ${W} ${R}
           V ${H - R} C ${W} ${H - S} ${W - S} ${H} ${W - R} ${H}
           H ${R} C ${S} ${H} 0 ${H - S} 0 ${H - R}
           V ${R} C 0 ${S} ${S} 0 ${R} 0 Z`}
-      ></path>
-    </svg>
-  );
-};
-const Icon = ({ icon, disabled, title, active }) => {
-  const iconStyle = title ? { marginRight: "8px" } : {};
+        ></path>
+      </svg>
 
-  const iconPresent = active
-    ? `${styles.icon} ${styles.iconActive}`
-    : `${styles.icon} ${styles.iconIdle}`;
+      {loader && <img className="loader" src={preloader} alt="Загрузка" />}
 
-  const iconClassName = disabled
-    ? `${styles.icon} ${styles.iconDisabled}`
-    : iconPresent;
+      {!loader && icon && <div className="icon"></div>}
 
-  if (icon) {
-    return (
-      <div className={iconClassName} style={iconStyle}>
-        {icon}
-      </div>
-    );
-  }
-  return null;
-};
-const Title = ({ title, disabled, active }) => {
-  const titlePresent = active
-    ? `${styles.title} ${styles.titleActive}`
-    : `${styles.title} ${styles.titleIdle}`;
-
-  const titleClassname = disabled
-    ? `${styles.title} ${styles.titleDisabled}`
-    : titlePresent;
-
-  if (title) {
-    return <div className={titleClassname}>{title}</div>;
-  }
-  return null;
-};
-
-export const Button = ({
-  width,
-  height,
-  title,
-  icon,
-  active,
-  disabled,
-  handler,
-}) => {
-  return (
-    <button
-      className={styles.button}
-      style={{ width, height }}
-      onClick={handler}
-      disabled={disabled}
-    >
-      <Shape
-        width={width}
-        height={height}
-        active={active}
-        disabled={disabled}
-      />
-      <Icon icon={icon} disabled={disabled} title={title} active={active} />
-      <Title title={title} disabled={disabled} active={active} />
-    </button>
+      {title && (
+        <div className="title">
+          {title}
+          {subtitle && <div className="subtitle">{subtitle}</div>}
+        </div>
+      )}
+    </ButtonWrap>
   );
 };

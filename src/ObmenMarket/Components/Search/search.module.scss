@@ -16,11 +16,14 @@
     background-color: transparent;
     margin-right: 8px;
 
-    font-family: "Inter", serif;
-    font-weight: 800;
-    font-size: 28px;
-    line-height: 1;
-    letter-spacing: -0.576px;
+    font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 20px;
+/* identical to box height, or 100% */
+
+letter-spacing: -0.32px;
+
     color: $fontTitle;
 
     transform: translateY(-50%);
@@ -50,9 +53,7 @@
     border: 0;
     border-bottom: 1px solid #d8d8d8;
     background-color: transparent;
-
     text-align: left;
-    font-family: "Inter", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;

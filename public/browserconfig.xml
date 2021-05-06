@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="https://obmen.market/mstile-150x150.png?type=duotone.v1"/>
+            <square310x310logo src="https://obmen.market/mstile-310x310.png?type=duotone.v1"/>
+            <wide310x150logo src="https://obmen.market/mstile-310x150.png?type=duotone.v1"/>
+            <TileColor>#7000ff</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>

@@ -1,0 +1,144 @@
+@import "../../../palette.scss";
+
+@mixin image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}
+
+@mixin activeTint {
+  opacity: 1; // tint opacity
+  background-color: $primaryTransparent; // tint color
+}
+
+@mixin hoverTint {
+  opacity: 0;
+  background-color: $galleryTint;
+  transition: 0.12s linear;
+}
+
+.layout {
+  width: 100%;
+  height: 0;
+  margin-bottom: 24px;
+  padding-top: calc(100% * 0.764);
+}
+
+.gallery {
+  .mainphoto {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: calc(100% * 0.563);
+    margin-bottom: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    mask-image: url(../../../Assets/Masks/lotPhoto.svg);
+    mask-size: cover;
+    mask-repeat: no-repeat;
+
+    .phototrack {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transition: 0.2s ease-in-out;
+
+      & > img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .tint {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include image;
+      @include hoverTint;
+      mask-image: url(../../../Assets/Masks/lotPhoto.svg);
+
+      .table {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .tabletitle {
+          & > h3 {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
+            letter-spacing: -0.149333px;
+            color: $fontWhite;
+            z-index: 5;
+          }
+
+          & > p {
+            font-size: 12px;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: -0.149333px;
+            color: rgba(255, 255, 255, 0.64);
+          }
+        }
+      }
+    }
+
+    &:hover .tint {
+      opacity: 1;
+    }
+  }
+
+  .thumbtrack {
+    display: flex;
+    margin-bottom: 24px;
+
+    .thumb {
+      position: relative;
+      width: calc(20% - 3.2px);
+      height: 0;
+      padding-top: calc(20% - 3.2px);
+      margin-right: 4px;
+      cursor: pointer;
+
+      & > img {
+        @include image;
+        mask-image: url(../../../Assets/Masks/commonBtn.svg);
+      }
+
+      &::after {
+        @include image;
+        @include hoverTint;
+        content: "";
+        mask-image: url(../../../Assets/Masks/commonBtn.svg);
+      }
+
+      &:hover::after {
+        opacity: 1;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .thumb_active {
+      position: relative;
+      &::after {
+        @include activeTint;
+        transition: none;
+      }
+      &:hover::after {
+        @include activeTint;
+      }
+    }
+  }
+}

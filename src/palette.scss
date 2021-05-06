@@ -1,19 +1,30 @@
-$fontWhite: #ffffff;
-$fontGrey: #413f46;
-$fontTitle: #160242;
-$fontDanger: #f2002c;
-$fontSub: #948ea3;
-$font5: #c0540b;
+// FONTS
 
-$primary: #4e00f2;
-$primaryIdleShadow: rgba(87, 60, 255, 0.18);
-$primaryIdleShadow2: rgba(87, 60, 255, 0.40);
-$primaryIdleShadow3: rgba(22, 2, 66, 0.75);
-$primaryTransparent: #573cffad;
-$primaryHover: #573cff;
+$fontWhite: #ffffff;
+$fontWelcome: #c8c5d9;
+$fontGrey: #4e4c54;
+$fontTitle: #160242;
+$fontActive: #3c148f;
+$fontDanger: #ff2b2b;
+$fontNotification: #ff2b2b;
+$fontDisabled: #b9b5db;
+$fontSub: #948ea3;
+
+// CTA BUTTON
+
+$primary: #7000ff;
+$primary2IdleShadow: #1a1a1a3f;
+$primary2HoverShadow: #1a1a1a48;
+$primaryTransparent: #7000ffc0;
+$primaryHover: #7831fb;
 $primaryActive: #edeff2;
 $primaryDisabled: #b5b1bf;
 $primaryFontClicked: #ccd1ff;
+
+$ctaIconHover1: #ffffff;
+$ctaIconHover2: #a966ff;
+
+// OUTLINE BUTTON
 
 $outline: #f9f8ff;
 $outlineStroke: #efecff;
@@ -21,20 +32,26 @@ $outlineHover: #c6bcff;
 $outlineClick: #e7e3ff;
 $outlineFontClicked: #4617a8;
 
+// COMMON
 
+$headerButton: #4d4765;
 $shape: #edeff2;
 $formSpacer: #e1e1e8;
 $spacer: #d8d8d8;
-
-$idleTransparent: #4d00f22f;
-
+$galleryTint: #413f46ab;
+$modalfill: #080314e5;
 
 $disabledText: #d4d1eb;
 $disabledIdle: #f9f8ff;
 $disabledStrike: #efecff;
 
-$txt: #ffffff;
-$txtclick: #ccd1ff;
-$txtclick2: #4617a8;
-$txtactive: #160242;
+// CHAT
 
+$chatbox: #f7f6f8;
+$chathover: #d4d2dd;
+$chatoverlay: #ffffff60;
+$chatfont1: #3d3158;
+$chatfont1hover: #a09cae;
+$chatfont2: #958aab;
+$ownermessage: #7000ff;
+$opponentmessage: #F7F6F8;

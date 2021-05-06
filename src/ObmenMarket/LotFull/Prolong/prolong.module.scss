@@ -1,0 +1,80 @@
+@import "../../../palette.scss";
+
+.modalpage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 6vw 0;
+    padding: 80px 56px;
+
+    &_img {
+      margin-bottom: 34px;
+    }
+
+    &_title {
+      margin-bottom: 24px;
+      font-weight: 800;
+      font-size: 49px;
+      line-height: 45px;
+      text-align: center;
+      letter-spacing: -1.576px;
+      color: $fontWhite;
+    }
+
+    &_text {
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 19px;
+      text-align: center;
+      letter-spacing: -0.08px;
+      color: #a1a1a1;
+    }
+  }
+
+  .payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &_select {
+      display: flex;
+      width: 380px;
+      height: 72px;
+      margin-bottom: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      background-color: $shape;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      margin-right: 8px;
+      padding: 0 16px;
+      border-radius: 16px;
+      cursor: pointer;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &_title {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 1.2;
+        letter-spacing: -0.149333px;
+        color: $fontTitle;
+      }
+    }
+
+    .paybutton {
+      margin-bottom: 16px;
+    }
+  }
+}

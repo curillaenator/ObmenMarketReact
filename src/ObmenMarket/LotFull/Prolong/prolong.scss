@@ -1,0 +1,22 @@
+@import "../../../palette.scss";
+
+.popup-overlay {
+  background-color: #080314e5;
+  animation-name: payOverlay;
+  animation-duration: 0.2s;
+}
+
+@keyframes payOverlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.popup-content {
+  width: 692px;
+  height: 100vh;
+}

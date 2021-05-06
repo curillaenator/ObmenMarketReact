@@ -1,0 +1,101 @@
+@import "../../palette.scss";
+
+.edit {
+  .container {
+    width: 100%;
+    padding: 32px 24px;
+    margin-bottom: 28px;
+    border-radius: 16px;
+    background-color: $shape;
+    z-index: -10;
+
+    .edittitle {
+      display: flex;
+      justify-content: center;
+      width: fit-content;
+      margin: 0 auto;
+      margin-bottom: 32px;
+      font-weight: 800;
+      font-size: 22px;
+      text-align: center;
+      line-height: 28px;
+      letter-spacing: -0.64px;
+      color: $fontTitle;
+    }
+
+    .editable {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .photo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 32px;
+
+        .avatar {
+          width: 126px;
+          height: 126px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 24px;
+        }
+
+        .username {
+          font-weight: 800;
+          font-size: 22px;
+          line-height: 28px;
+          letter-spacing: -0.64px;
+          color: $fontTitle;
+          margin-bottom: 12px;
+        }
+
+        .upload {
+          z-index: 20;
+        }
+      }
+
+      .fields {
+        width: 100%;
+
+        .field {
+          margin-bottom: 16px;
+        }
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    width: 100%;
+
+    .save {
+      margin-right: 20px;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .edit {
+    .container {
+      .editable {
+        flex-direction: row;
+
+        .photo {
+          width: calc(30% - 12px);
+          margin-bottom: 0;
+        }
+
+        .fields {
+          width: calc(70% - 12px);
+        }
+      }
+    }
+
+    .buttons {
+      justify-content: flex-start;
+    }
+  }
+}

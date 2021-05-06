@@ -1,0 +1,45 @@
+@import "../../../palette.scss";
+
+.offer {
+  margin-top: -23px;
+  margin-bottom: 32px;
+
+  .cloudtail {
+    margin-left: 50%;
+    margin-bottom: -3px;
+    transform: translateX(-50%);
+  }
+
+  .shape {
+    width: 100%;
+    padding: 24px;
+    margin-bottom: 28px;
+    border-radius: 16px;
+    background-color: $shape;
+    z-index: -10;
+
+    .title {
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 19px;
+      letter-spacing: -0.08px;
+      color: $fontTitle;
+    }
+
+    .overprice {
+      margin-bottom: 24px;
+    }
+
+    .photos {
+      margin-bottom: 24px;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 10;
+  }
+}
